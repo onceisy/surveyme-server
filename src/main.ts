@@ -5,8 +5,8 @@ import { TransformInterceptor } from './interceptor/transform/transform.intercep
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalFilters(new HttpExceptionFilter);
-  app.useGlobalInterceptors(new TransformInterceptor);
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalInterceptors(new TransformInterceptor());
   app.setGlobalPrefix('api');
   await app.listen(3001);
 }

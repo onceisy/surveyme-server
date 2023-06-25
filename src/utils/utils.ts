@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+import dayjs from 'dayjs';
+import mongoose from 'mongoose';
 
 export interface UserInfo {
   username: string;
@@ -19,5 +20,9 @@ export function formatUserInfo(data): UserInfo {
     avatar: data.avatar,
     phoneNumber: data.phoneNumber,
     _id: data._id,
-  }
+  };
+}
+
+export function getCurrentTime() {
+  return dayjs().valueOf();
 }

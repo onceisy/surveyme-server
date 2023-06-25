@@ -13,6 +13,6 @@ export class UserService {
   }
 
   async findUserByUsername(username) {
-    return await this.userModel.findOne({username}).exec();
+    return await this.userModel.findOne({ username }).exec();
   }
 }
