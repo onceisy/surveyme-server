@@ -46,23 +46,23 @@ export class QuestionController {
       });
     }
 
-    const { title, createUser } = body;
+    const { createUser, title } = body;
     if (!title || !createUser || !isValidObjectId(createUser)) {
       throw new BadRequestException({
         message: PARAMS_ERROR,
       });
     }
-
+    // 检查名称重复
     const created = await this.QuestionService.findQuestion({
-      title,
       createUser,
+      title,
     } as Question);
     if (created) {
       throw new BadRequestException({
         message: QUESTION_EXIST,
       });
     }
-    return await this.QuestionService.create({ title, createUser } as Question);
+    return await this.QuestionService.create({ createUser, title } as Question);
   }
 
   @Patch('list')

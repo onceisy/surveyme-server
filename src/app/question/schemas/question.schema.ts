@@ -8,7 +8,7 @@ export type questionDocument = HydratedDocument<Question>;
 
 @Schema()
 export class Question {
-  @Prop()
+  @Prop({ default: '' })
   title: string;
 
   @Prop({ default: false })
@@ -26,7 +26,7 @@ export class Question {
   @Prop({ default: getCurrentTime() })
   updatedAt: number;
 
-  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'users' })
   createUser: User;
 }
 
