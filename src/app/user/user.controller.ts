@@ -24,6 +24,7 @@ export class UserController {
     const params = {
       ...body,
       username: (body.username as string) || '',
+      nickname: (body.username as string) || '',
       password: (body.password as string) || '',
     };
     if (

@@ -6,6 +6,7 @@ export interface UserInfo {
   avatar: string;
   phoneNumber: string;
   password?: string;
+  nickname?: string;
   _id: mongoose.Schema.Types.ObjectId;
 }
 
@@ -18,6 +19,7 @@ export function formatUserInfo(data): UserInfo {
   return {
     username: data.username,
     avatar: data.avatar,
+    nickname: data.nickname || '',
     phoneNumber: data.phoneNumber,
     _id: data._id,
   };
