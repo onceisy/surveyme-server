@@ -6,3 +6,6 @@ export const PASSWORD_ERROR = 'passwordError';
 
 export const QUESTION_EXIST = 'questionExist';
 export const QUESTION_NOT_FOUND = 'questionNotFound';
+
+export const OPTIONS_EXIST = 'optionsExist';
+export const OPTIONS_NOT_FOUND = 'optionsNotFound';

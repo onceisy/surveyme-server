@@ -5,6 +5,7 @@ import { AuthModule } from './app/auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './app/user/user.module';
 import { QuestionModule } from './app/question/question.module';
+import { ConfigModule } from './app/config/config.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { QuestionModule } from './app/question/question.module';
     MongooseModule.forRoot('mongodb://localhost:40008'),
     UserModule,
     QuestionModule,
+    ConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService],

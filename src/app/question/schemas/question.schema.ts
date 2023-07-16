@@ -20,10 +20,10 @@ export class Question {
   @Prop({ default: false })
   isDeleted: boolean;
 
-  @Prop({ default: getCurrentTime() })
+  @Prop({ default: () => getCurrentTime() })
   createdAt: number;
 
-  @Prop({ default: getCurrentTime() })
+  @Prop({ default: () => getCurrentTime() })
   updatedAt: number;
 
   @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'users' })
