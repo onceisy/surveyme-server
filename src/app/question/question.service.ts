@@ -40,7 +40,7 @@ export class QuestionService {
 
   async queryQuestionList(filters, projection, options) {
     const count = await this.questionModel.count(filters);
-    const list = await this.questionModel.find(filters, projection, options);
+    const list = await this.questionModel.find(filters, projection, options).select({ componentList: 0 });
     return {
       list,
       count,

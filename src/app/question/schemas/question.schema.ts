@@ -20,6 +20,9 @@ export class Question {
   @Prop({ default: false })
   isDeleted: boolean;
 
+  @Prop({ default: true })
+  isAutoSave: boolean;
+
   @Prop({ default: () => getCurrentTime() })
   createdAt: number;
 
@@ -28,6 +31,9 @@ export class Question {
 
   @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'users' })
   createUser: User;
+  
+  @Prop({ default: () => ([]) })
+  componentList: Array<Object>;
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(Question);

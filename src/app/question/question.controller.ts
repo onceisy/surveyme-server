@@ -46,8 +46,8 @@ export class QuestionController {
       });
     }
 
-    const { createUser, title } = body;
-    if (!title || !createUser || !isValidObjectId(createUser)) {
+    const { createUser, title, componentList } = body;
+    if (!title || !createUser || !componentList || !Array.isArray(componentList) || !isValidObjectId(createUser)) {
       throw new BadRequestException({
         message: PARAMS_ERROR,
       });
@@ -62,7 +62,7 @@ export class QuestionController {
         message: QUESTION_EXIST,
       });
     }
-    return await this.QuestionService.create({ createUser, title } as Question);
+    return await this.QuestionService.create({ createUser, title, componentList } as Question);
   }
 
   @Patch('list')
@@ -108,7 +108,7 @@ export class QuestionController {
   async patchQuestion(@Req() request, @Param() params) {
     const { body } = request;
     const { id } = params;
-    const { title, isPublished, isStar, isDeleted } = body;
+    const { title, isPublished, isStar, isDeleted, componentList, isAutoSave } = body;
     if (!isValidObjectId(id) || Object.keys(body).length < 1) {
       throw new BadRequestException({
         message: PARAMS_ERROR,
@@ -120,10 +120,10 @@ export class QuestionController {
         message: QUESTION_NOT_FOUND,
       });
     }
-    const data = {
+    const data: Partial<Question> = {
       title: title || question.title,
       updatedAt: getCurrentTime(),
-    } as Question;
+    };
     if (isPublished !== undefined && isBoolean(isPublished)) {
       data.isPublished = isPublished;
     }
@@ -132,6 +132,12 @@ export class QuestionController {
     }
     if (isDeleted !== undefined && isBoolean(isDeleted)) {
       data.isDeleted = isDeleted;
+    }
+    if (isAutoSave !== undefined && isBoolean(isAutoSave)) {
+      data.isAutoSave = isAutoSave;
+    }
+    if (Array.isArray(componentList) && componentList.length) {
+      data.componentList = componentList;
     }
     return await this.QuestionService.updateQuestionById(id, data);
   }
@@ -239,12 +245,9 @@ export class QuestionController {
       });
     }
     const data = {
+      ...createdQuestion,
       createdAt: getCurrentTime(),
       updatedAt: getCurrentTime(),
-      isStar: createdQuestion.isStar,
-      isPublished: createdQuestion.isPublished,
-      isDeleted: createdQuestion.isDeleted,
-      createUser: createdQuestion.createUser,
       title: createdQuestion.title + getCurrentTime(),
     };
     return await this.QuestionService.create(data);

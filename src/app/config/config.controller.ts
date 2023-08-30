@@ -51,19 +51,19 @@ export class ConfigController {
     const { pageSize, pageNumber, name } = query
     const limit = Number(pageSize);
     const skip = limit * (Number(pageNumber) - 1);
-    if (!limit || isNaN(skip)) {
-      throw new BadRequestException({
-        message: PARAMS_ERROR,
-      });
-    }
+    // if (!limit || isNaN(skip)) {
+    //   throw new BadRequestException({
+    //     message: PARAMS_ERROR,
+    //   });
+    // }
     const filters: Object[] = [{ name: { $regex: name || '' } }];
     return await this.ConfigService.queryOptionsList(
       { $and: filters },
       undefined,
-      {
+      skip && limit ? {
         skip,
         limit,
-      },
+      } : undefined,
     );
 
   }
