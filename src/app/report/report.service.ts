@@ -13,9 +13,14 @@ export class QuestionAnswerService {
     const created = new this.questionAnswerModel(data);
     return await created.save();
   }
-  async queryAnswerList({ filters, projection = undefined, options }) {
+
+  async queryAnswerList({ filters, projection = undefined, options = undefined }) {
     const count = await this.questionAnswerModel.count(filters);
     const list = await this.questionAnswerModel.find(filters, projection, options);
     return { count, list };
+  }
+
+  async queryQuestionReport(questionId: string) {
+    return await this.questionAnswerModel.find({ questionId });
   }
 }

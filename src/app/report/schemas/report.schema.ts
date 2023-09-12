@@ -27,9 +27,10 @@ export class QuestionAnswer {
   @Prop({ default: () => ([]) })
   data: Array<{
     // 组件的_id
-    _id: string;
+    componentId: string;
     value: string;
-    text: string | Array<string>,
+    label: string | Array<string>;
+    componentType: string;
   }>;
 }
 

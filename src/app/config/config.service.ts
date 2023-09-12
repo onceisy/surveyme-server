@@ -21,6 +21,12 @@ export class ConfigService {
   async findOptionsById(id: string) {
     return await this.optionsModel.findById(id);
   }
+
+  async findOptionsByIds(ids: string[]) {
+    return await this.optionsModel.find({
+      _id: { $in: ids }
+    });
+  }
   async findOptionsByIdAndUpdate(id: string, data: Options) {
     return await this.optionsModel.findByIdAndUpdate(id, data);
   }

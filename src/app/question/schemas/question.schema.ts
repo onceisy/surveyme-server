@@ -14,6 +14,9 @@ export class Question {
   @Prop({ default: false })
   isPublished: boolean;
 
+  @Prop({ default: '' })
+  cover?: string;
+
   @Prop({ default: false })
   isStar: boolean;
 
@@ -33,7 +36,13 @@ export class Question {
   createUser: User;
   
   @Prop({ default: () => ([]) })
-  componentList: Array<Object>;
+  componentList: Array<{
+    componentId: string;
+    props: {
+      [key: string]: any,
+    };
+    [key: string]: any;
+  }>;
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(Question);

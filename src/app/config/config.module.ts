@@ -12,5 +12,6 @@ import { ConfigService } from './config.service';
   ],
   controllers: [ConfigController],
   providers: [ConfigService],
+  exports: [ConfigService],
 })
 export class ConfigModule {}

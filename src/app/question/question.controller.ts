@@ -246,9 +246,11 @@ export class QuestionController {
     }
     const data = {
       ...createdQuestion,
+      createUser: createdQuestion.createUser,
+      componentList: createdQuestion.componentList,
       createdAt: getCurrentTime(),
       updatedAt: getCurrentTime(),
-      title: createdQuestion.title + getCurrentTime(),
+      title: createdQuestion.title + '_1',
     };
     return await this.QuestionService.create(data);
   }
